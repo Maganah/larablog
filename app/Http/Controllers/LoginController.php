@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class LoginController extends Controller
 {
-    public function showLoginPage(){
+    public function show(){
         return view('/login');//
     }
 
@@ -23,9 +23,9 @@ class LoginController extends Controller
 
     $credentials = $request->only('email', 'password');
 
-    if (Auth::attempt($credentials)) {
+    if (Auth::attempt($credentials, $request->input('remember', default:false))) {
         // Authentication was successful
-        return redirect()->intended('/users');
+        return redirect()->intended('/home')->with('success', 'Welcome ' . Auth::user()->name . '! You have successfully logged in.');
     } else {
         // Authentication failed
         return back()->withErrors([
