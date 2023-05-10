@@ -25,7 +25,7 @@ class LoginController extends Controller
 
     if (Auth::attempt($credentials, $request->input('remember', default:false))) {
         // Authentication was successful
-        return redirect()->intended('/home')->with('success', 'Welcome ' . Auth::user()->name . '! You have successfully logged in.');
+        return redirect('/home')->with('success', 'Welcome ' . Auth::user()->name . '! You have successfully logged in.');
     } else {
         // Authentication failed
         return back()->withErrors([

@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-md-offset-4" style="margin-top:20px;">
+          <div class="col-md-5 mx-auto">
             <h4>Login</h4>
             <hr>
                 <form class="form-container" method="POST" action="/login">

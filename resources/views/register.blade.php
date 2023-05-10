@@ -9,13 +9,17 @@
     integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
+    <div class="main">
+
+    </div>
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-md-offset-4" style="margin-top:20px;">
-            <h4>Registration</h4>
-            <hr>
-                <form method="POST" action="/register">
-                    @if(Session::has('success'))
+            <div class="col-md-5 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                    <h4>Registration</h4>
+                      <form method="POST" action="/register">
+                         @if(Session::has('success'))
                         <div class="alert alert-success">{{Session::get('success')}}
                         </div>
                     @endif
@@ -61,6 +65,9 @@
                     <br>
                     <a href="{{ route('login') }}"> Already Registered? Log in Here!!!!!</a>
                 </form>
+                    </div>
+                </div>
+            </div>
             </div>
         </div>
     </div>
