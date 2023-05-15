@@ -17,10 +17,10 @@
             <a class="nav-link" href="{{ route('home') }}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Profile</a>
+            <a class="nav-link" href="{{ route('posts') }}">Posts</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">About Us</a>
+            <a class="nav-link" href="{{ route('comments')}}">Comments</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Contact Us</a>
@@ -45,7 +45,28 @@
     </div>
     <footer class="bg-light py-4">
       <div class="container">
-        <p class="text-center">&copy; 2023 My Blog</p>
-      </div>
+
+    @section('content')
+        <div class="row">
+          <div class="col-md-4 mx-auto mt-3">
+            <div class="list-group">
+              <div class="list-group-item">
+              <h1>Create a Post</h1>
+                <form action="{{ route ('posts')}}" method="POST">
+                  <label for="title">Title:</label><br>
+                  <input type="text" id="title" name="title" placeholder="Type the post title" required><br><br>
+                  <label for="body">Body:</label><br>
+                  <textarea id="body" name="body" placeholder="Start typing here" required></textarea><br><br>
+                    <input type="submit" value=" Publish">
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="list-group-item">
+          <h3>Post Feed</h3>
+        </div>
+      @endsection
+      <p class="text-center">&copy; 2023 My Blog</p>
+     </div>
     </footer>
-    <script src="https://code.jquery.com/jquery-3.2.1

@@ -15,10 +15,19 @@ class Post extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+    
 /**
  * Getting the comments for the blog post
  */
     public function comments(): HasMany{
         return $this->hasMany(Comment::class);
     }
+
+    /**
+     * 
+     */
+    protected $fillable = [
+        'title',
+        'body',
+    ];
 }

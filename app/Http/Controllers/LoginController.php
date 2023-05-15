@@ -10,8 +10,17 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class LoginController extends Controller
 {
+    /**
+     * restrict logged in users from accessing the login page
+     */
+    public function __construct()
+    {
+        $this->middleware('guest');
+    }
+
+
     public function show(){
-        return view('/login');//
+        return view('/auth.login');//
     }
 
     public function loginUser(Request $request){
@@ -28,9 +37,7 @@ class LoginController extends Controller
         return redirect('/home')->with('success', 'Welcome ' . Auth::user()->name . '! You have successfully logged in.');
     } else {
         // Authentication failed
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+        return back()->withErrors(['email' => 'The provided credentials do not match our records.']);
     }
 }
 
