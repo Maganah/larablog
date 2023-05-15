@@ -1,72 +1,58 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>My Blog</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  </head>
-  <body background="grey">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">My Blog</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('home') }}">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('posts') }}">Posts</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('comments')}}">Comments</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Contact Us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ route('login') }}">Log Out</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <div class="container my-4">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="card mb-4">
-            <div class="card-body">
-              <h5 class="card-title">My Blog Post</h5>
-              <p class="card-text">This is my first blog post
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <footer class="bg-light py-4">
-      <div class="container">
+@extends('layouts.app')
 
-    @section('content')
-        <div class="row">
-          <div class="col-md-4 mx-auto mt-3">
-            <div class="list-group">
-              <div class="list-group-item">
-              <h1>Create a Post</h1>
-                <form action="{{ route ('posts')}}" method="POST">
-                  <label for="title">Title:</label><br>
-                  <input type="text" id="title" name="title" placeholder="Type the post title" required><br><br>
-                  <label for="body">Body:</label><br>
-                  <textarea id="body" name="body" placeholder="Start typing here" required></textarea><br><br>
-                    <input type="submit" value=" Publish">
-                </form>
-              </div>
-            </div>
+@section('page-title', "What's New Here?!")
+
+@section('content')
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6 mt-3">
+      <div class="card">
+        <div class="card-body">
+          @if(session('success'))
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
+          @endif
+          @if(session('error'))
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          @endif
+          <h5 class="card-title">Create a New Post</h5>
+          <form action="{{ route('posts') }}" method="POST">
+            @csrf
+            <div class="mb-3">
+              <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" placeholder="Type the title of your post" name="title" value="{{ old('title') ?? '' }}">
+              @error('title')
+              <div class="invalid-feedback">
+                {{ $message }}
+              </div>
+              @enderror
+            </div>
+            <div class="mb-3">
+              <textarea class="form-control @error('body') is-invalid @enderror" name="body" id="body" rows="5" placeholder="Describe your post"></textarea>
+              @error('body')
+              <div class="invalid-feedback">
+                {{ $message }}
+              </div>
+              @enderror
+            </div>
+            <button type="submit" class="btn btn-primary">Publish</button>
+          </form>
         </div>
-        <div class="list-group-item">
-          <h3>Post Feed</h3>
+      </div>
+      <div>
+        <h4> Post Feeds</h4>
+        <div>
+          @forelse($posts as $post)
+          @endforelse
         </div>
-      @endsection
-      <p class="text-center">&copy; 2023 My Blog</p>
-     </div>
-    </footer>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+@endsection

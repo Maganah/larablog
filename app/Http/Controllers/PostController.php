@@ -10,7 +10,7 @@ class PostController extends Controller
     public function posts(Request $request) {
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'body' => 'required|string|email|max:1000'
+            'body' => 'required|string|max:1000'
         ]);
 
         Post::create([
