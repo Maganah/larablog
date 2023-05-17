@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Session\Session;
 
@@ -17,6 +18,15 @@ class LoginController extends Controller
     {
         $this->middleware('guest');
     }
+
+    public function logout(Request $request) : RedirectResponse
+    {
+        Auth::logout();
+       
+        // Redirect to the desired page after logout
+        return redirect('/home');
+    }
+
 
 
     public function show(){

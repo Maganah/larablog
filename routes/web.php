@@ -30,6 +30,7 @@ Route::middleware(['guest'])->group(function(){
     //Login routes
     Route::get('/login', [LoginController::class, 'show'])->name('login');
     Route::post('/login', [LoginController::class, 'loginUser'])->name('login');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
 
@@ -39,6 +40,7 @@ Route::get('/users', [UsersController::class, 'displayUsers'])->name('users.inde
 Route::middleware(['auth'])->group(function(){
     Route::get('/home', [HomeController::class, 'home'])->name('home');
 
+    
     Route::get('/posts', [PostController::class, 'posts'])->name('posts');
     Route::post('/posts', [PostController::class, 'posts'])->name('posts');
     Route::get('/comments', [CommentController::class, 'comments'])->name('comments');

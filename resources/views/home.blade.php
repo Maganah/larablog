@@ -43,10 +43,20 @@
           </form>
         </div>
       </div>
-      <div>
+      <div class="list-group-item">
         <h4> Post Feeds</h4>
-        <div>
+        <div class="list-group">
           @forelse($posts as $post)
+          <div href="#" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">{{ $post->title}}</h5>
+              <small class="text-muted">{{ $post->created_at->diffForHumans()}} </small>
+            </div>
+            <p class="mb-1">{{ $post->body}}</p>
+            <small class="text-muted">By {{ $post->user->name ?? 'Uknown User'}} </small>
+          </div>
+          @empty
+          <div class="list-group-item">Refresh the feed later. No Posts Found!!</div>
           @endforelse
         </div>
       </div>
