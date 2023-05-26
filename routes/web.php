@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -30,6 +31,7 @@ Route::middleware(['guest'])->group(function(){
     //Login routes
     Route::get('/login', [LoginController::class, 'show'])->name('login');
     Route::post('/login', [LoginController::class, 'loginUser'])->name('login');
+    //Logout routes
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
@@ -40,9 +42,11 @@ Route::get('/users', [UsersController::class, 'displayUsers'])->name('users.inde
 Route::middleware(['auth'])->group(function(){
     Route::get('/home', [HomeController::class, 'home'])->name('home');
 
+    //create Posts
+    Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+    Route::post('/posts', [PostController::class, 'create'])->name('posts.create');
+
+    //create comments
+    Route::post('/comments/{post}', [CommentController::class, 'store'])->name('comments.store');
     
-    Route::get('/posts', [PostController::class, 'posts'])->name('posts');
-    Route::post('/posts', [PostController::class, 'posts'])->name('posts');
-    Route::get('/comments', [CommentController::class, 'comments'])->name('comments');
-    Route::post('/comments', [CommentController::class, 'comments'])->name('comments');
 });

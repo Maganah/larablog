@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Comment extends Model
 {
     use HasFactory;
+
+    protected $with = ['user', 'post'];
       /**
      * 
      */
@@ -25,7 +27,6 @@ class Comment extends Model
      * 
      */
     protected $fillable = [
-        'title',
         'body',
     ];
 }

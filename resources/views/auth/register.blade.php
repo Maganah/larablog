@@ -3,8 +3,11 @@
 
 @section('content')
     <div class="card">
-        {{ $errors }}
         <div class="card-body">
+        <div class="card-header">
+            <h4> Register Here</h4>
+            
+        </div>
             <form action="{{ route('register') }}" method="POST">
                 @csrf
                 <div class="mb-3">

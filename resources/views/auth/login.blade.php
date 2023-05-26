@@ -3,7 +3,6 @@
 
 @section('content')
     <div class="card">
-        {{ $errors }}
         <div class="card-header">
             <h4> Login Here</h4>
             
@@ -33,7 +32,7 @@
         </div>
         <div class="card-footer">
             <p>
-                Have NO an Account?!  <a href="{{ route('register')}}"> Create Account Here!!</a>
+                Have NO Account?!  <a href="{{ route('register')}}"> Create Account Here!!</a>
             </p>
         </div>
     </div>

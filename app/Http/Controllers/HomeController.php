@@ -8,10 +8,9 @@ use App\Models\Post;
 class HomeController extends Controller
 {
     public function home() {
-        $posts = Post::with('user')->latest()->get();
 
         return view('home', [
-            'posts' => $posts
+            'posts' => Post::with([ 'user' ])->withCount(['comments'])->latest()->get()
         ]);
     }
 }
